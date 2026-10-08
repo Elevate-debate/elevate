@@ -812,7 +812,7 @@ async function fetchGoogleSheetResources() {
         source: 'sheet'
       });
     }
-    return list.length > 0 ? list : null;
+    return list;
   } catch (err) {
     console.warn('[ETC Resources] Google Sheet query unavailable:', err);
     return null;
@@ -820,7 +820,7 @@ async function fetchGoogleSheetResources() {
 }
 
 /**
- * Loads all resources from Google Sheets, local JSON, or config with local storage merges
+ * Loads all resources exclusively from Google Sheets
  */
 let cachedResources = null;
 async function loadAllResources(forceRefresh = false) {
@@ -828,45 +828,23 @@ async function loadAllResources(forceRefresh = false) {
     return cachedResources;
   }
 
-  // 1. Core resource library across all categories/sections
-  let resources = [...(window.SITE_CONFIG?.resources || [])];
-
-  // 2. Fallback to /data/resources.json if config is empty
-  if (resources.length === 0) {
-    try {
-      const res = await fetch('data/resources.json');
-      if (res.ok) {
-        resources = await res.json();
-      }
-    } catch (e) {}
-  }
-
-  let source = 'config';
-
-  // 3. Merge live Google Sheet resources without removing other sections
+  // 1. Live Google Sheet is the sole source of truth
   try {
     const sheetData = await fetchGoogleSheetResources();
-    if (sheetData && sheetData.length > 0) {
-      const sheetTitles = new Set(sheetData.map(s => (s.title || '').toLowerCase().trim()));
-      const nonOverridden = resources.filter(r => !sheetTitles.has((r.title || '').toLowerCase().trim()));
-      resources = [...sheetData, ...nonOverridden];
-      source = 'sheet';
+    if (sheetData !== null) {
+      cachedResources = sheetData;
+      window.__ETC_RESOURCES_SOURCE = 'sheet';
+      return sheetData;
     }
   } catch (e) {
     console.warn('[ETC Resources] Sheet error:', e);
   }
 
-  // 4. Merge any browser-local custom resources from localStorage (prepend so new additions show first)
-  try {
-    const localSaved = JSON.parse(localStorage.getItem('etc_custom_resources') || '[]');
-    if (Array.isArray(localSaved) && localSaved.length > 0) {
-      resources = [...localSaved, ...resources];
-    }
-  } catch (e) {}
-
-  cachedResources = resources;
-  window.__ETC_RESOURCES_SOURCE = source;
-  return resources;
+  // 2. Fallback only if Google Sheet request fails completely
+  const fallback = window.SITE_CONFIG?.resources || [];
+  cachedResources = fallback;
+  window.__ETC_RESOURCES_SOURCE = 'fallback';
+  return fallback;
 }
 
 /**
@@ -886,6 +864,9 @@ async function renderHomePage() {
 
   // 1b. Render Interactive 50-State US Expansion Map (Live synced to Google Sheet)
   renderInteractiveUSMap(chapters);
+
+  // 1c. Initialize Hero Photo Slideshow (Synced to ETC Ov.zip)
+  initHeroPhotoSlideshow();
 
   // 2. Pillars / What We Do Grid
   const pillarsContainer = document.getElementById('pillars-grid');
@@ -920,6 +901,165 @@ async function renderHomePage() {
   }
 
   setupScrollReveal();
+}
+
+/**
+ * ====================================================================
+ * HERO PHOTO SHOWCASE (PURE FULL-SIZE PHOTOS ONLY, SYNCED TO ETC OV.ZIP)
+ * ====================================================================
+ */
+function initHeroPhotoSlideshow() {
+  const container = document.getElementById('hero-photo-slideshow');
+  if (!container) return;
+
+  const track = document.getElementById('slideshow-track');
+  if (!track) return;
+
+  // Initial verified photos extracted directly from ETC Ov.zip
+  let photos = [
+    { url: 'images/overview/IMG_3068.jpeg' },
+    { url: 'images/overview/IMG_3069.jpeg' },
+    { url: 'images/overview/IMG_3070.jpeg' },
+    { url: 'images/overview/IMG_3071.jpeg' },
+    { url: 'images/overview/IMG_3072.jpeg' },
+    { url: 'images/overview/IMG_3134.jpeg' }
+  ];
+
+  let currentIndex = 0;
+  let shuffleQueue = [];
+  let queueIndex = 0;
+  let shuffleTimer = null;
+  const slideDuration = 3500; // Regular shuffle every 3.5 seconds
+
+  function buildShuffleQueue() {
+    shuffleQueue = photos.map((_, i) => i);
+    // Fisher-Yates shuffle
+    for (let i = shuffleQueue.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffleQueue[i], shuffleQueue[j]] = [shuffleQueue[j], shuffleQueue[i]];
+    }
+    // Prevent identical photo when queue loops
+    if (shuffleQueue.length > 1 && shuffleQueue[0] === currentIndex) {
+      shuffleQueue.push(shuffleQueue.shift());
+    }
+    queueIndex = 0;
+  }
+
+  function advanceShuffle() {
+    if (photos.length <= 1) return;
+    queueIndex++;
+    if (queueIndex >= shuffleQueue.length) {
+      buildShuffleQueue();
+    }
+    currentIndex = shuffleQueue[queueIndex] ?? 0;
+    updateActiveSlide();
+  }
+
+  function updateActiveSlide() {
+    const slides = track.querySelectorAll('.slideshow-slide');
+    slides.forEach((s, i) => {
+      if (i === currentIndex) {
+        s.classList.add('active');
+      } else {
+        s.classList.remove('active');
+      }
+    });
+  }
+
+  function renderSlides() {
+    if (!track || photos.length === 0) return;
+
+    track.innerHTML = photos.map((p, i) => `
+      <div class="slideshow-slide ${i === currentIndex ? 'active' : ''}" data-index="${i}">
+        <img src="${p.url}" alt="Elevate the Circuit Photo" loading="${i === 0 ? 'eager' : 'lazy'}">
+      </div>
+    `).join('');
+
+    buildShuffleQueue();
+  }
+
+  function startTimer() {
+    if (shuffleTimer) clearInterval(shuffleTimer);
+    shuffleTimer = setInterval(advanceShuffle, slideDuration);
+  }
+
+  function stopTimer() {
+    if (shuffleTimer) clearInterval(shuffleTimer);
+    shuffleTimer = null;
+  }
+
+  container.addEventListener('mouseenter', stopTimer);
+  container.addEventListener('mouseleave', startTimer);
+
+  renderSlides();
+  startTimer();
+
+  // Background dynamic sync with ETC Ov.zip and photos.json
+  syncWithZipAndManifest();
+
+  async function syncWithZipAndManifest() {
+    try {
+      const res = await fetch('images/overview/photos.json?_t=' + Date.now());
+      if (res.ok) {
+        const manifest = await res.json();
+        if (Array.isArray(manifest) && manifest.length > 0) {
+          photos = manifest.map(m => ({
+            url: m.url || m,
+            name: m.name || m.url || 'Photo'
+          }));
+          renderSlides();
+        }
+      }
+    } catch (e) {}
+
+    // Live ZIP reading in browser ensures dynamic sync even if zip is replaced
+    try {
+      const zipRes = await fetch('ETC%20Ov.zip?_t=' + Date.now());
+      if (zipRes.ok) {
+        const blob = await zipRes.blob();
+        if (blob && blob.size > 0) {
+          if (!window.JSZip) {
+            await new Promise((resolve) => {
+              const s = document.createElement('script');
+              s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+              s.onload = () => resolve();
+              s.onerror = () => resolve();
+              document.head.appendChild(s);
+            });
+          }
+
+          if (window.JSZip) {
+            const zip = await window.JSZip.loadAsync(blob);
+            const entries = [];
+            zip.forEach((relPath, entry) => {
+              if (!entry.dir && /\.(jpe?g|png|webp|gif)$/i.test(relPath) && !relPath.includes('__MACOSX')) {
+                entries.push({ relPath, entry });
+              }
+            });
+
+            entries.sort((a, b) => a.relPath.localeCompare(b.relPath));
+
+            const zipPhotos = [];
+            for (const item of entries) {
+              const imgBlob = await item.entry.async('blob');
+              const objUrl = URL.createObjectURL(imgBlob);
+              zipPhotos.push({
+                url: objUrl,
+                name: item.relPath
+              });
+            }
+
+            if (zipPhotos.length > 0) {
+              photos = zipPhotos;
+              renderSlides();
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('[ETC Slideshow] Zip background sync note:', err);
+    }
+  }
 }
 
 /**
