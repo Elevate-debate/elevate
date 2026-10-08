@@ -19,7 +19,8 @@ window.SITE_CONFIG = {
     phone: "(555) 234-DEBATE",
     location: "National Initiative • Local Chapters Nationwide",
     logoText: "ELEVATE THE CIRCUIT",
-    logoSubtext: "Youth Forensics League"
+    logoSubtext: "Youth Forensics League",
+    logoUrl: "LOGO.png"
   },
 
   // --- THEME & APPEARANCE (Red & Dark Navy Forensics Brand) ---
@@ -62,10 +63,10 @@ window.SITE_CONFIG = {
 
   // --- KEY IMPACT METRICS (Home Overview) ---
   stats: [
-    { id: "stat-chapters", value: "1", label: "Active School Chapter", detail: "Elevate Debate NC (Expanding Nationwide)" },
-    { id: "stat-students", value: "130+", label: "Students Impacted", detail: "Active debaters in weekly training" },
-    { id: "stat-schools", value: "5+", label: "Partner Schools", detail: "Middle & high schools worked with" },
-    { id: "stat-states", value: "1", label: "State Represented", detail: "North Carolina & national expansion" }
+    { id: "stat-chapters", value: "2", label: "Active Chapters", detail: "North Carolina & Regional Member Hubs" },
+    { id: "stat-students", value: "140+", label: "Students Impacted", detail: "Active debaters in weekly training" },
+    { id: "stat-schools", value: "6+", label: "Partner Schools", detail: "Middle & high schools worked with" },
+    { id: "stat-states", value: "2", label: "States Represented", detail: "North Carolina & California Circuits" }
   ],
 
   // --- LIVE GOOGLE SHEETS DATABASE ---
@@ -83,16 +84,35 @@ window.SITE_CONFIG = {
       id: "ch-01",
       chapterName: "Elevate Debate NC",
       city: "Charlotte",
-      state: "NC",
+      state: "North Carolina",
       yearFounded: "2025",
       studentsImpacted: "130+",
+      students_count: 130,
       schoolsWorkedWith: "5 Partner Schools",
+      schools_worked_with: 5,
       eventsOffered: "Original Oratory, Impromptu, Congressional Debate, Public Forum, Lincoln Douglas",
       contactInfo: "Derin Gulkanat and Ishan Saha • elevatedebateusa@gmail.com",
       contact_email: "elevatedebateusa@gmail.com",
-      socialMedia: "@elevatedebatenc",
-      instagram: "@elevatedebatenc",
-      instagram_handle: "@elevatedebatenc"
+      socialMedia: "@elevatethecircuit_charlotte",
+      instagram: "@elevatethecircuit_charlotte",
+      instagram_handle: "@elevatethecircuit_charlotte"
+    },
+    {
+      id: "ch-02",
+      chapterName: "Elevate Debate Sacramento",
+      city: "Sacramento",
+      state: "California",
+      yearFounded: "2026",
+      studentsImpacted: "10+",
+      students_count: 10,
+      schoolsWorkedWith: "1 Partner Schools",
+      schools_worked_with: 1,
+      eventsOffered: "Original Oratory, Congressional Debate, Public Forum",
+      contactInfo: "Saanvi Nanda • elevatedebateusa@gmail.com",
+      contact_email: "elevatedebateusa@gmail.com",
+      socialMedia: "",
+      instagram: "",
+      instagram_handle: ""
     }
   ],
 

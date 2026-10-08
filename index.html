@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="LOGO.png">
 </head>
 <body>
 
@@ -19,9 +20,7 @@
   <header class="site-header">
     <div class="container nav-wrapper">
       <a href="index.html" class="brand-logo" aria-label="Elevate the Circuit Home">
-        <div class="brand-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m4 6 8-4 8 4"/><path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"/><path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/><path d="M18 5v17"/><path d="M6 5v17"/></svg>
-        </div>
+        <img src="LOGO.png" alt="Elevate the Circuit Logo" class="brand-logo-img">
         <div class="brand-text">
           <span class="brand-name" data-bind="org-short">Elevate the Circuit</span>
           <span class="brand-subtext">National Forensics Network</span>
@@ -79,7 +78,7 @@
               <div class="avatar">+</div>
             </div>
             <p id="hero-social-proof-text" style="font-size: 0.88rem; color: var(--slate-600); font-weight: 500;">
-              Empowering <strong>5+ partner schools</strong> and over <strong>130+ student debaters</strong> across North Carolina.
+              Empowering <strong>6+ partner schools</strong> and over <strong>140+ student debaters</strong> across 2 states.
             </p>
           </div>
         </div>
@@ -128,8 +127,8 @@
 
             <div style="margin-top: 1.25rem; padding-top: 0.85rem; border-top: 1px solid var(--surface-border); display: flex; justify-content: space-between; align-items: center;">
               <div>
-                <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--slate-500); text-transform: uppercase; font-weight: 600;">Cloud Database</span>
-                <p style="font-weight: 700; font-size: 0.85rem; color: var(--navy-900); margin: 0;">PostgreSQL Live Synced</p>
+                <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--slate-500); text-transform: uppercase; font-weight: 600;">Chapter Registry</span>
+                <p style="font-weight: 700; font-size: 0.85rem; color: var(--navy-900); margin: 0;">Live Synced Roster</p>
               </div>
               <a href="chapter-tracker.html" class="btn btn-secondary btn-sm" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;">
                 Open Registry
@@ -143,7 +142,28 @@
     <!-- HIGH-DENSITY KEY IMPACT STATS (HAIRLINE DIVIDER BAR) -->
     <section class="stats-section" aria-label="Impact Metrics">
       <div class="container">
-        <div class="stats-grid" id="stats-grid"></div>
+        <div class="stats-grid" id="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="stat-home-chapters" style="color: var(--navy-dark); font-family: var(--font-mono);">2</div>
+            <div class="stat-label" style="font-weight: 700; color: var(--accent); font-family: var(--font-mono); text-transform: uppercase; font-size: 0.78rem;">Active Chapters</div>
+            <div class="stat-detail">North Carolina & California Circuits</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-home-students" style="color: var(--navy-dark); font-family: var(--font-mono);">140+</div>
+            <div class="stat-label" style="font-weight: 700; color: var(--accent); font-family: var(--font-mono); text-transform: uppercase; font-size: 0.78rem;">Students Impacted</div>
+            <div class="stat-detail">Active debaters in weekly training</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-home-schools" style="color: var(--navy-dark); font-family: var(--font-mono);">6+</div>
+            <div class="stat-label" style="font-weight: 700; color: var(--accent); font-family: var(--font-mono); text-transform: uppercase; font-size: 0.78rem;">Partner Schools</div>
+            <div class="stat-detail">Consortium member programs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-home-states" style="color: var(--navy-dark); font-family: var(--font-mono);">2</div>
+            <div class="stat-label" style="font-weight: 700; color: var(--accent); font-family: var(--font-mono); text-transform: uppercase; font-size: 0.78rem;">States Represented</div>
+            <div class="stat-detail">North Carolina & California Circuits</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -249,7 +269,10 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <h3 style="color: var(--navy-900); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.35rem;" data-bind="org-name">Elevate the Circuit</h3>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.65rem;">
+            <img src="LOGO.png" alt="Elevate the Circuit Logo" class="footer-logo-img">
+            <h3 style="color: var(--navy-900); font-size: 1.25rem; font-weight: 700; margin: 0;" data-bind="org-name">Elevate the Circuit</h3>
+          </div>
           <p data-bind="org-tagline">Empowering Students to Find Their Voice & Lead.</p>
           <div class="footer-socials" id="footer-socials"></div>
         </div>

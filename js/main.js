@@ -102,7 +102,7 @@ function renderCommonElements() {
         <div class="announcement-content">
           <span class="badge" style="background: var(--accent); color: #fff; font-family: var(--font-mono); font-size: 0.72rem;">${config.announcement.badge}</span>
           <span>${config.announcement.text}</span>
-          <a href="${config.announcement.buttonLink}" class="announcement-link" style="color: var(--accent-light); font-weight: 700;">${config.announcement.buttonText} â†’</a>
+          <a href="${config.announcement.buttonLink}" class="announcement-link" style="color: var(--accent-light); font-weight: 700;">${config.announcement.buttonText} &rarr;</a>
         </div>
       `;
       annEl.style.display = 'flex';
@@ -461,174 +461,62 @@ window.submitNewChapterFromModal = async function(e) {
   }
 };
 
-window.showToast = function(message, type = 'info') {
+let toastTimeout = null;
+window.showToast = function(message, type = 'info', duration = 4500) {
   const toast = document.getElementById('toast-notice');
   if (!toast) return;
+  if (toastTimeout) clearTimeout(toastTimeout);
   toast.textContent = message;
   toast.className = `toast-notice show ${type}`;
-  setTimeout(() => {
+  toastTimeout = setTimeout(() => {
     toast.className = 'toast-notice';
-  }, 3500);
+  }, duration);
 };
 
 /**
  * ====================================================================
- * HOMEPAGE RENDERING & LIVE IMPACT STATS
+ * SHARED DATA LAYER: LIVE CHAPTERS & STATE NORMALIZATION
  * ====================================================================
  */
-async function renderHomePage() {
-  const config = window.SITE_CONFIG;
-  if (!config) return;
-
-  // Fetch live chapters from Supabase backend
-  let chapters = [];
-  try {
-    if (window.ETC_BACKEND) {
-      chapters = await window.ETC_BACKEND.getChapters();
-    }
-  } catch (e) {
-    console.warn('Backend query error on homepage:', e);
-  }
-
-  if (!chapters || chapters.length === 0) {
-    chapters = config.chapters || [];
-  }
-
-  // 1. Render Live Impact Metrics Grid
-  renderHomeStatsGrid(chapters);
-
-  // 2. Pillars / Why Debate Grid
-  const pillarsContainer = document.getElementById('pillars-grid');
-  if (pillarsContainer && config.pillars) {
-    pillarsContainer.innerHTML = config.pillars.map((pillar, i) => `
-      <div class="pillar-card reveal-on-scroll stagger-${(i % 3) + 1}">
-        <div class="pillar-icon-box" style="background: var(--navy-wash); color: var(--navy-dark); border: 1px solid rgba(10, 17, 40, 0.1);">
-          ${getIcon(pillar.icon)}
-        </div>
-        <div style="flex: 1;">
-          <h3 class="pillar-title" style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--navy-dark); margin: 0 0 0.3rem;">${pillar.title}</h3>
-          <p class="pillar-desc" style="color: var(--slate-600); font-size: 0.92rem; line-height: 1.6; margin: 0;">${pillar.description}</p>
-        </div>
-      </div>
-    `).join('');
-  }
-
-
-  // 4. Testimonials
-  const testContainer = document.getElementById('testimonials-grid');
-  if (testContainer && config.testimonials) {
-    testContainer.innerHTML = config.testimonials.map((item, i) => `
-      <div class="testimonial-card reveal-on-scroll stagger-${(i % 3) + 1}">
-        <p class="testimonial-quote" style="font-family: var(--font-serif); font-size: 1.05rem; font-style: italic; color: var(--navy-dark);">${item.quote}</p>
-        <div class="testimonial-author">
-          <div class="author-info">
-            <h4 style="font-weight: 800; color: var(--navy-dark);">${item.name}</h4>
-            <p>${item.role} â€¢ <strong>${item.school}</strong></p>
-          </div>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  setupScrollReveal();
-}
-
-/**
- * Computes and animates 4 key impact cards on homepage
- */
-function renderHomeStatsGrid(chapters) {
-  const statsContainer = document.getElementById('stats-grid');
-  if (!statsContainer) return;
-
-  const totalChapters = chapters.length;
-  const statesSet = new Set(chapters.map(c => c.state).filter(Boolean));
-  const statesCount = statesSet.size || 1;
-
-  const totalStudents = chapters.reduce((sum, c) => {
-    const rawCount = c.students_count || c.studentsCount || c.studentsImpacted || 0;
-    const match = String(rawCount).match(/\d+/);
-    return sum + (match ? parseInt(match[0], 10) : 0);
-  }, 0) || 130;
-
-  const schoolsCount = chapters.reduce((sum, c) => {
-    return sum + (c.schools_worked_with || c.schoolsWorkedWith || 1);
-  }, 0) || 5;
-
-  const homeStats = [
-    { 
-      id: "stat-home-chapters", 
-      value: String(totalChapters || 1), 
-      label: totalChapters === 1 ? "Active Chapter" : "Active Chapters", 
-      detail: "Elevate Debate NC & National Hubs" 
-    },
-    { 
-      id: "stat-home-students", 
-      value: `${totalStudents}+`, 
-      label: "Students Impacted", 
-      detail: "Active debaters in weekly training" 
-    },
-    { 
-      id: "stat-home-schools", 
-      value: `${schoolsCount}+`, 
-      label: "Partner Schools", 
-      detail: "Consortium member programs" 
-    },
-    { 
-      id: "stat-home-states", 
-      value: String(statesCount), 
-      label: statesCount === 1 ? "State Represented" : "States Represented", 
-      detail: "North Carolina & Southeast Circuit" 
-    }
-  ];
-
-  statsContainer.innerHTML = homeStats.map((stat, i) => `
-    <div class="stat-card reveal-on-scroll stagger-${(i % 4) + 1}">
-      <div class="stat-value" id="${stat.id}" style="color: var(--navy-dark); font-family: var(--font-mono);">${stat.value}</div>
-      <div class="stat-label" style="font-weight: 700; color: var(--accent); font-family: var(--font-mono); text-transform: uppercase; font-size: 0.78rem;">${stat.label}</div>
-      <div class="stat-detail">${stat.detail}</div>
-    </div>
-  `).join('');
-
-  homeStats.forEach(stat => {
-    const el = document.getElementById(stat.id);
-    if (el) {
-      el.classList.add('counter-animated');
-      animateCounter(el, stat.value);
-    }
-  });
-
-  const heroSocialText = document.getElementById('hero-social-proof-text');
-  if (heroSocialText) {
-    heroSocialText.innerHTML = `Empowering <strong>${schoolsCount}+ partner schools</strong> and over <strong>${totalStudents}+ student debaters</strong> across ${statesCount} state${statesCount === 1 ? '' : 's'}.`;
-  }
-}
-
-/**
- * ====================================================================
- * CHAPTER TRACKER: DOSSIER CARDS & NATIONAL REGISTRY TABLE
- * ====================================================================
- */
-let currentDirectoryView = 'cards'; // 'cards' or 'table'
-
-window.switchTrackerView = function(view) {
-  currentDirectoryView = view;
-  const cardsContainer = document.getElementById('chapters-grid');
-  const tableContainer = document.getElementById('chapters-table-container');
-  const cardsBtn = document.getElementById('view-cards-btn');
-  const tableBtn = document.getElementById('view-table-btn');
-
-  if (view === 'table') {
-    if (cardsContainer) cardsContainer.style.display = 'none';
-    if (tableContainer) tableContainer.style.display = 'block';
-    if (cardsBtn) cardsBtn.classList.remove('active');
-    if (tableBtn) tableBtn.classList.add('active');
-  } else {
-    if (cardsContainer) cardsContainer.style.display = 'grid';
-    if (tableContainer) tableContainer.style.display = 'none';
-    if (cardsBtn) cardsBtn.classList.add('active');
-    if (tableBtn) tableBtn.classList.remove('active');
-  }
+const US_STATE_NAMES = {
+  'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas', 'CA': 'California',
+  'CO': 'Colorado', 'CT': 'Connecticut', 'DE': 'Delaware', 'FL': 'Florida', 'GA': 'Georgia',
+  'HI': 'Hawaii', 'ID': 'Idaho', 'IL': 'Illinois', 'IN': 'Indiana', 'IA': 'Iowa',
+  'KS': 'Kansas', 'KY': 'Kentucky', 'LA': 'Louisiana', 'ME': 'Maine', 'MD': 'Maryland',
+  'MA': 'Massachusetts', 'MI': 'Michigan', 'MN': 'Minnesota', 'MS': 'Mississippi', 'MO': 'Missouri',
+  'MT': 'Montana', 'NE': 'Nebraska', 'NV': 'Nevada', 'NH': 'New Hampshire', 'NJ': 'New Jersey',
+  'NM': 'New Mexico', 'NY': 'New York', 'NC': 'North Carolina', 'ND': 'North Dakota', 'OH': 'Ohio',
+  'OK': 'Oklahoma', 'OR': 'Oregon', 'PA': 'Pennsylvania', 'RI': 'Rhode Island', 'SC': 'South Carolina',
+  'SD': 'South Dakota', 'TN': 'Tennessee', 'TX': 'Texas', 'UT': 'Utah', 'VT': 'Vermont',
+  'VA': 'Virginia', 'WA': 'Washington', 'WV': 'West Virginia', 'WI': 'Wisconsin', 'WY': 'Wyoming', 'DC': 'District of Columbia'
 };
+
+function normalizeState(state) {
+  if (!state) return '';
+  const trimmed = state.trim();
+  const upper = trimmed.toUpperCase();
+  if (US_STATE_NAMES[upper]) return US_STATE_NAMES[upper];
+  for (const [abbr, full] of Object.entries(US_STATE_NAMES)) {
+    if (full.toLowerCase() === trimmed.toLowerCase()) return full;
+  }
+  return trimmed;
+}
+
+function getStateAbbr(state) {
+  if (!state) return '';
+  const trimmed = state.trim();
+  const upper = trimmed.toUpperCase();
+  if (US_STATE_NAMES[upper]) return upper;
+  for (const [abbr, full] of Object.entries(US_STATE_NAMES)) {
+    if (full.toLowerCase() === trimmed.toLowerCase()) return abbr;
+  }
+  return trimmed.substring(0, 2).toUpperCase();
+}
+
+/**
+ * In-memory cache for live chapter records
+ */
+let cachedChapters = null;
 
 /**
  * Fetches and parses live Google Sheet chapter records
@@ -734,17 +622,27 @@ async function fetchGoogleSheetChapters() {
   return null;
 }
 
-async function renderChapterTrackerPage() {
-  const countDisplay = document.getElementById('chapter-filter-count');
-  if (countDisplay) countDisplay.textContent = 'Loading verified chapter roster...';
+/**
+ * Loads all chapters uniformly across both Overview and Chapter Tracker:
+ * 1. Live Google Sheet
+ * 2. Supabase Backend
+ * 3. Static SITE_CONFIG chapters fallback
+ */
+async function loadAllChapters(forceRefresh = false) {
+  if (!forceRefresh && cachedChapters && cachedChapters.length > 0) {
+    return cachedChapters;
+  }
 
   let chapters = [];
   try {
     const sheetData = await fetchGoogleSheetChapters();
     if (sheetData && sheetData.length > 0) {
-      chapters = sheetData;
+      cachedChapters = sheetData;
+      return sheetData;
     }
-  } catch (e) {}
+  } catch (e) {
+    console.warn('[ETC Sheet] Fetch error:', e);
+  }
 
   if (!chapters || chapters.length === 0) {
     try {
@@ -752,13 +650,186 @@ async function renderChapterTrackerPage() {
         chapters = await window.ETC_BACKEND.getChapters();
       }
     } catch (err) {
-      console.warn('Backend query error:', err);
+      console.warn('[ETC Backend] Query error:', err);
     }
   }
 
   if (!chapters || chapters.length === 0) {
     chapters = window.SITE_CONFIG?.chapters || [];
   }
+
+  cachedChapters = chapters;
+  return chapters;
+}
+
+/**
+ * ====================================================================
+ * HOMEPAGE RENDERING & LIVE IMPACT STATS
+ * ====================================================================
+ */
+async function renderHomePage() {
+  const config = window.SITE_CONFIG;
+  if (!config) return;
+
+  // Fetch live chapters synchronized with Google Sheet / Chapter Tracker
+  const chapters = await loadAllChapters();
+
+  // 1. Render Live Impact Metrics Grid & Hero Text
+  renderHomeStatsGrid(chapters);
+
+  // 2. Pillars / What We Do Grid
+  const pillarsContainer = document.getElementById('pillars-grid');
+  if (pillarsContainer && config.pillars) {
+    pillarsContainer.innerHTML = config.pillars.map((pillar, i) => `
+      <div class="pillar-card reveal-on-scroll stagger-${(i % 3) + 1}">
+        <div class="pillar-icon-box" style="background: var(--navy-wash); color: var(--navy-dark); border: 1px solid rgba(10, 17, 40, 0.1);">
+          ${getIcon(pillar.icon)}
+        </div>
+        <div style="flex: 1;">
+          <h3 class="pillar-title" style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--navy-dark); margin: 0 0 0.3rem;">${pillar.title}</h3>
+          <p class="pillar-desc" style="color: var(--slate-600); font-size: 0.92rem; line-height: 1.6; margin: 0;">${pillar.description}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // 3. Testimonials (if present)
+  const testContainer = document.getElementById('testimonials-grid');
+  if (testContainer && config.testimonials) {
+    testContainer.innerHTML = config.testimonials.map((item, i) => `
+      <div class="testimonial-card reveal-on-scroll stagger-${(i % 3) + 1}">
+        <p class="testimonial-quote" style="font-family: var(--font-serif); font-size: 1.05rem; font-style: italic; color: var(--navy-dark);">${item.quote}</p>
+        <div class="testimonial-author">
+          <div class="author-info">
+            <h4 style="font-weight: 800; color: var(--navy-dark);">${item.name}</h4>
+            <p>${item.role} • <strong>${item.school}</strong></p>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  setupScrollReveal();
+}
+
+/**
+ * Computes and animates 4 key impact cards on homepage
+ * Fully synced to the Google Sheet and Chapter Tracker roster
+ */
+function renderHomeStatsGrid(chapters) {
+  const statsContainer = document.getElementById('stats-grid');
+  if (!statsContainer) return;
+
+  const totalChapters = chapters.length;
+  const statesSet = new Set(chapters.map(c => normalizeState(c.state)).filter(Boolean));
+  const statesCount = statesSet.size || 1;
+
+  const totalStudents = chapters.reduce((sum, c) => {
+    const rawCount = c.students_count || c.studentsCount || c.studentsImpacted || 0;
+    const match = String(rawCount).match(/\d+/);
+    return sum + (match ? parseInt(match[0], 10) : 0);
+  }, 0) || 140;
+
+  const schoolsCount = chapters.reduce((sum, c) => {
+    const raw = c.schools_worked_with !== undefined ? c.schools_worked_with : (c.schoolsWorkedWith || 1);
+    const match = String(raw).match(/\d+/);
+    return sum + (match ? parseInt(match[0], 10) : 1);
+  }, 0) || 6;
+
+  const stateNamesList = Array.from(statesSet);
+  let stateDetail = "North Carolina & California Circuits";
+  if (statesCount > 1) {
+    if (statesCount <= 3) {
+      stateDetail = stateNamesList.join(" & ") + " Circuits";
+    } else {
+      stateDetail = `National Network Across ${statesCount} States`;
+    }
+  } else if (statesCount === 1) {
+    stateDetail = (stateNamesList[0] || 'North Carolina') + " Circuit";
+  }
+
+  const homeStats = [
+    { 
+      id: "stat-home-chapters", 
+      value: String(totalChapters || 2), 
+      label: totalChapters === 1 ? "Active Chapter" : "Active Chapters", 
+      detail: totalChapters === 1 ? "Elevate Debate NC (Expanding)" : "North Carolina & California Circuits" 
+    },
+    { 
+      id: "stat-home-students", 
+      value: `${totalStudents}+`, 
+      label: "Students Impacted", 
+      detail: "Active debaters in weekly training" 
+    },
+    { 
+      id: "stat-home-schools", 
+      value: `${schoolsCount}+`, 
+      label: "Partner Schools", 
+      detail: "Consortium member programs" 
+    },
+    { 
+      id: "stat-home-states", 
+      value: String(statesCount), 
+      label: statesCount === 1 ? "State Represented" : "States Represented", 
+      detail: stateDetail 
+    }
+  ];
+
+  statsContainer.innerHTML = homeStats.map((stat, i) => `
+    <div class="stat-card reveal-on-scroll stagger-${(i % 4) + 1}">
+      <div class="stat-value" id="${stat.id}" style="color: var(--navy-dark); font-family: var(--font-mono);">${stat.value}</div>
+      <div class="stat-label" style="font-weight: 700; color: var(--accent); font-family: var(--font-mono); text-transform: uppercase; font-size: 0.78rem;">${stat.label}</div>
+      <div class="stat-detail">${stat.detail}</div>
+    </div>
+  `).join('');
+
+  homeStats.forEach(stat => {
+    const el = document.getElementById(stat.id);
+    if (el) {
+      el.classList.add('counter-animated');
+      animateCounter(el, stat.value);
+    }
+  });
+
+  const heroSocialText = document.getElementById('hero-social-proof-text');
+  if (heroSocialText) {
+    const statesText = statesCount === 1 ? (stateNamesList[0] || 'North Carolina') : `${statesCount} states`;
+    heroSocialText.innerHTML = `Empowering <strong>${schoolsCount}+ partner schools</strong> and over <strong>${totalStudents}+ student debaters</strong> across ${statesText}.`;
+  }
+}
+
+/**
+ * ====================================================================
+ * CHAPTER TRACKER: DOSSIER CARDS & NATIONAL REGISTRY TABLE
+ * ====================================================================
+ */
+let currentDirectoryView = 'cards'; // 'cards' or 'table'
+
+window.switchTrackerView = function(view) {
+  currentDirectoryView = view;
+  const cardsContainer = document.getElementById('chapters-grid');
+  const tableContainer = document.getElementById('chapters-table-container');
+  const cardsBtn = document.getElementById('view-cards-btn');
+  const tableBtn = document.getElementById('view-table-btn');
+
+  if (view === 'table') {
+    if (cardsContainer) cardsContainer.style.display = 'none';
+    if (tableContainer) tableContainer.style.display = 'block';
+    if (cardsBtn) cardsBtn.classList.remove('active');
+    if (tableBtn) tableBtn.classList.add('active');
+  } else {
+    if (cardsContainer) cardsContainer.style.display = 'grid';
+    if (tableContainer) tableContainer.style.display = 'none';
+    if (cardsBtn) cardsBtn.classList.add('active');
+    if (tableBtn) tableBtn.classList.remove('active');
+  }
+};
+
+async function renderChapterTrackerPage() {
+  const countDisplay = document.getElementById('chapter-filter-count');
+  if (countDisplay) countDisplay.textContent = 'Loading verified chapter roster...';
+
+  const chapters = await loadAllChapters();
 
   // Summary Counters
   const totalChaptersEl = document.getElementById('total-chapters-count');
@@ -768,20 +839,22 @@ async function renderChapterTrackerPage() {
 
   if (totalChaptersEl) animateCounter(totalChaptersEl, String(chapters.length));
   if (statesEl) {
-    const statesSet = new Set(chapters.map(c => c.state).filter(Boolean));
+    const statesSet = new Set(chapters.map(c => normalizeState(c.state)).filter(Boolean));
     animateCounter(statesEl, String(statesSet.size || 1));
   }
   if (debatersEl) {
     const totalStudents = chapters.reduce((sum, c) => {
       const match = String(c.students_count || c.studentsCount || c.studentsImpacted || 0).match(/\d+/);
       return sum + (match ? parseInt(match[0], 10) : 0);
-    }, 0) || 130;
+    }, 0) || 140;
     animateCounter(debatersEl, `${totalStudents}+`);
   }
   if (schoolsEl) {
     const schoolsCount = chapters.reduce((sum, c) => {
-      return sum + (c.schools_worked_with || c.schoolsWorkedWith || 1);
-    }, 0) || 5;
+      const raw = c.schools_worked_with !== undefined ? c.schools_worked_with : (c.schoolsWorkedWith || 1);
+      const match = String(raw).match(/\d+/);
+      return sum + (match ? parseInt(match[0], 10) : 1);
+    }, 0) || 6;
     animateCounter(schoolsEl, `${schoolsCount}+`);
   }
 
@@ -805,6 +878,8 @@ async function renderChapterTrackerPage() {
       const events = Array.isArray(ch.events_offered) 
         ? ch.events_offered.join(' ').toLowerCase() 
         : (ch.eventsOffered || '').toLowerCase();
+      const normState = normalizeState(ch.state).toLowerCase();
+      const abbrState = getStateAbbr(ch.state).toLowerCase();
 
       let matchesFilter = true;
       if (currentFilter !== 'all') {
@@ -817,7 +892,11 @@ async function renderChapterTrackerPage() {
         } else if (currentFilter === 'middle-school') {
           matchesFilter = schoolType.includes('middle') || school.includes('middle');
         } else {
-          matchesFilter = state.includes(currentFilter.toLowerCase()) || chName.includes(currentFilter.toLowerCase());
+          const filterLower = currentFilter.toLowerCase();
+          matchesFilter = state.includes(filterLower) || 
+                          normState.includes(filterLower) || 
+                          abbrState === filterLower || 
+                          chName.includes(filterLower);
         }
       }
 
@@ -826,6 +905,8 @@ async function renderChapterTrackerPage() {
         school.includes(q) ||
         city.includes(q) ||
         state.includes(q) ||
+        normState.includes(q) ||
+        abbrState === q ||
         events.includes(q);
 
       return matchesFilter && matchesSearch;
@@ -1118,7 +1199,7 @@ function renderGetInvolvedPage() {
         <p class="track-subtitle" style="font-weight: 600; color: var(--accent); font-size: 0.9rem;">${track.subtitle}</p>
         <p class="track-desc">${track.description}</p>
         <a href="${track.ctaLink}" class="btn btn-primary" style="margin-top: 1rem;">
-          ${track.ctaText} â†’
+          ${track.ctaText} &rarr;
         </a>
       </div>
     `).join('');
@@ -1155,7 +1236,7 @@ function renderContactPage() {
 }
 
 /**
- * Handle form submissions (Chapter Application saves to national circuit directory)
+ * Handle form submissions (Chapter Application & Contact Inquiry routing directly to email)
  */
 function setupFormSubmissions() {
   document.querySelectorAll('form[data-interactive="true"]').forEach(form => {
@@ -1164,32 +1245,116 @@ function setupFormSubmissions() {
       const formName = form.getAttribute('data-form-name') || 'Submission';
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalText = submitBtn ? submitBtn.textContent : 'Submit';
+      const destinationEmail = window.SITE_CONFIG?.org?.contactEmail || 'elevatethecircuitusa@gmail.com';
+      const isChapterApp = formName.toLowerCase().includes('chapter');
 
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Saving to Database...';
+        submitBtn.textContent = 'Sending to ' + destinationEmail + '...';
       }
 
       const formData = new FormData(form);
-      const appPayload = {
-        applicant_name: formData.get('applicant_name') || formData.get('name') || 'Student Founder',
-        applicant_email: formData.get('applicant_email') || formData.get('email') || 'elevatethecircuitusa@gmail.com',
-        applicant_role: formData.get('applicant_role') || 'student',
-        school_name: formData.get('school_name') || 'School',
-        city: formData.get('city') || 'Local City',
-        state: (formData.get('state') || 'NC').toUpperCase(),
-        estimated_students: parseInt(formData.get('estimated_students'), 10) || 12,
-        notes: `Application for ${formName}`
-      };
+      let emailPayload = {};
+      let appPayload = null;
 
+      if (isChapterApp) {
+        const applicantName = (formData.get('applicant_name') || formData.get('name') || '').trim();
+        const applicantEmail = (formData.get('applicant_email') || formData.get('email') || '').trim();
+        const applicantRole = (formData.get('applicant_role') || 'High School Student Founder').trim();
+        const schoolName = (formData.get('school_name') || '').trim();
+        const city = (formData.get('city') || '').trim();
+        const state = (formData.get('state') || '').trim().toUpperCase();
+        const estStudents = formData.get('estimated_students') || '15';
+        const debateFormat = formData.get('target_format') || 'Undecided / Please recommend for us';
+        const notes = (formData.get('notes') || '').trim();
+
+        appPayload = {
+          applicant_name: applicantName,
+          applicant_email: applicantEmail,
+          applicant_role: applicantRole,
+          school_name: schoolName,
+          city: city,
+          state: state,
+          estimated_students: parseInt(estStudents, 10) || 15,
+          notes: notes
+        };
+
+        emailPayload = {
+          _subject: `New Chapter Application: ${schoolName} (${state}) - ${applicantName}`,
+          _replyto: applicantEmail,
+          _template: 'table',
+          _captcha: 'false',
+          'Applicant Name': applicantName,
+          'Email Address': applicantEmail,
+          'Applicant Role': applicantRole,
+          'School / Organization': schoolName,
+          'City': city,
+          'State': state,
+          'Estimated Students': estStudents,
+          'Preferred Debate Format': debateFormat,
+          'School Notes & Goals': notes || 'None provided',
+          'Submitted At': new Date().toLocaleString()
+        };
+      } else {
+        const name = (formData.get('name') || '').trim();
+        const email = (formData.get('email') || '').trim();
+        const role = (formData.get('role') || 'Student').trim();
+        const subject = (formData.get('subject') || 'General Inquiry').trim();
+        const message = (formData.get('message') || '').trim();
+
+        emailPayload = {
+          _subject: `New ETC Contact Message: ${subject} from ${name}`,
+          _replyto: email,
+          _template: 'table',
+          _captcha: 'false',
+          'Full Name': name,
+          'Email Address': email,
+          'Role': role,
+          'Topic': subject,
+          'Message': message,
+          'Submitted At': new Date().toLocaleString()
+        };
+      }
+
+      // 1. Keep a local offline copy in registry cache as safety backup
       try {
-        if (window.ETC_BACKEND) {
+        if (isChapterApp && window.ETC_BACKEND && appPayload) {
           await window.ETC_BACKEND.submitChapterApplication(appPayload);
         }
-        window.showToast(`Application saved to national registry! We will contact you at ${appPayload.applicant_email}.`, 'success');
-        form.reset();
+      } catch (cacheErr) {
+        console.warn('Local backup notice:', cacheErr);
+      }
+
+      // 2. Dispatch directly to elevatethecircuitusa@gmail.com
+      try {
+        const response = await fetch(`https://formsubmit.co/ajax/${destinationEmail}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(emailPayload)
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (response.ok && (result.success === 'true' || result.success === true)) {
+          const successMsg = isChapterApp 
+            ? `Chapter application submitted! It has been delivered directly to ${destinationEmail}.` 
+            : `Message sent! It has been delivered directly to ${destinationEmail}.`;
+          window.showToast(successMsg, 'success', 6000);
+          form.reset();
+        } else if (result.message && result.message.toLowerCase().includes('activation')) {
+          window.showToast(`FormSubmit needs 1-time activation: Open elevatethecircuitusa@gmail.com (check Spam/Updates) and click "Activate Form"!`, 'warning', 9000);
+          form.reset();
+        } else if (result.message && result.message.toLowerCase().includes('web server')) {
+          window.showToast(`Notice: Browsing directly as a local file (file://) is blocked by email security. Once deployed to the web (or run on localhost), emails deliver directly to ${destinationEmail}.`, 'warning', 8000);
+        } else {
+          throw new Error(result.message || 'Submission error');
+        }
       } catch (err) {
-        window.showToast('Notice: ' + (err.message || 'Saved locally'), 'info');
+        console.warn('Submission notice:', err);
+        window.showToast(`Application saved to local registry. To deliver emails to ${destinationEmail}, ensure the site is running on a web server and FormSubmit is activated in Gmail.`, 'info', 7000);
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;

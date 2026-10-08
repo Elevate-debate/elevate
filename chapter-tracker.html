@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="LOGO.png">
   <style>
     /* Remove duplicate Instagram link from chapter card footer */
     .chapter-card-item > div:last-child > a[href*="instagram"] {
@@ -25,9 +26,7 @@
   <header class="site-header">
     <div class="container nav-wrapper">
       <a href="index.html" class="brand-logo" aria-label="Elevate the Circuit Home">
-        <div class="brand-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m4 6 8-4 8 4"/><path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"/><path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/><path d="M18 5v17"/><path d="M6 5v17"/></svg>
-        </div>
+        <img src="LOGO.png" alt="Elevate the Circuit Logo" class="brand-logo-img">
         <div class="brand-text">
           <span class="brand-name" data-bind="org-short">Elevate the Circuit</span>
           <span class="brand-subtext">Chapter Directory</span>
@@ -187,7 +186,10 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <h3 style="color: var(--navy-900); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.35rem;" data-bind="org-name">Elevate the Circuit</h3>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.65rem;">
+            <img src="LOGO.png" alt="Elevate the Circuit Logo" class="footer-logo-img">
+            <h3 style="color: var(--navy-900); font-size: 1.25rem; font-weight: 700; margin: 0;" data-bind="org-name">Elevate the Circuit</h3>
+          </div>
           <p data-bind="org-tagline">Empowering Students to Find Their Voice & Lead.</p>
           <div class="footer-socials" id="footer-socials"></div>
         </div>
