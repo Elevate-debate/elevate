@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --canvas: #E6E1F9;
+    --surface: #ffffff;
+    --surface-border: #D2C7F0;
+    --navy-950: #0a0f1d;
+    --navy-900: #0f172a;
+    --navy-800: #1e293b;
+    --crimson: #dc2626;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--navy-900);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.machined-card {
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.95), 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+}
+
+.machined-dark {
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.35);
+}
+
+.machined-btn-primary {
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.18), 0 1px 2px 0 rgba(15, 23, 42, 0.25);
+}
+
+.status-beacon {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #dc2626;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+}
+

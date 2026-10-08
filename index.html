@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elevate the Circuit - Empowering Youth Speech & Debate Chapters</title>
+  <meta name="description" content="Turnkey debate curriculums, starter kits, coaching workshops, and tournament fee grants to launch thriving speech & debate chapters in middle and high schools.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Top Announcement Banner -->
+  <aside id="announcement-banner" class="announcement-bar" role="complementary" aria-label="Announcement"></aside>
+
+  <!-- Site Header & Navigation -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="index.html" class="brand-logo" aria-label="Elevate the Circuit Home">
+        <div class="brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m4 6 8-4 8 4"/><path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"/><path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/><path d="M18 5v17"/><path d="M6 5v17"/></svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name" data-bind="org-short">Elevate the Circuit</span>
+          <span class="brand-subtext">National Forensics Network</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links" id="site-nav-links"></ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Live Supabase Status & SSO User Dock -->
+        <div class="nav-user-dock" id="nav-user-dock"></div>
+
+        <a href="get-involved.html" class="btn btn-primary btn-sm">
+          Start a Chapter
+        </a>
+        <button id="mobile-menu-btn" class="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION (CAMPSITE MINIMALISM + RAYCAST FIDELITY) -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge-wrap">
+            <span class="mono-tag-crimson">NATIONAL FORENSICS ORGANIZATION • EST. 2025</span>
+          </div>
+          <h1 class="hero-title">
+            Every Student Deserves a <em>Platform to Speak</em>.
+          </h1>
+          <p class="hero-subtitle" data-bind="org-mission">
+            We partner with public middle and high schools to establish self-sustaining, championship-caliber speech & debate programs. Providing turnkey curriculum kits, experienced coaching workshops, and full tournament fee subsidies so no student is left unheard.
+          </p>
+
+          <div class="hero-actions">
+            <a href="get-involved.html" class="btn btn-primary btn-lg">
+              Start a Chapter at Your School
+            </a>
+            <a href="resources.html" class="btn btn-secondary btn-lg">
+              Explore Curriculum
+            </a>
+          </div>
+
+          <div class="hero-social-proof">
+            <div class="avatar-group">
+              <div class="avatar">DG</div>
+              <div class="avatar">IS</div>
+              <div class="avatar">NC</div>
+              <div class="avatar">+</div>
+            </div>
+            <p id="hero-social-proof-text" style="font-size: 0.88rem; color: var(--slate-600); font-weight: 500;">
+              Empowering <strong>5+ partner schools</strong> and over <strong>130+ student debaters</strong> across North Carolina.
+            </p>
+          </div>
+        </div>
+
+        <!-- Hero Graphic Preview: Machined Raycast Chapter Dossier Card -->
+        <div class="hero-card-preview">
+          <div class="docket-card">
+            <div class="docket-header-bar">
+              <span class="docket-seal-tag">OFFICIAL CHAPTER DOSSIER #01</span>
+              <span style="font-size: 0.78rem; color: var(--navy-900); font-weight: 700; display: inline-flex; align-items: center; gap: 0.45rem;">
+                <span class="status-beacon"></span> Active Forensics Chapter
+              </span>
+            </div>
+
+            <div style="margin-bottom: 0.85rem;">
+              <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.25rem;">
+                Elevate Debate NC
+              </h3>
+              <p style="font-size: 0.84rem; color: var(--slate-500); font-weight: 500;">
+                Charlotte, NC • Consortium of 5 Partner High Schools • Est. 2025
+              </p>
+            </div>
+
+            <div class="docket-events-grid">
+              <span class="event-chip">Public Forum</span>
+              <span class="event-chip">Lincoln Douglas</span>
+              <span class="event-chip">Original Oratory</span>
+              <span class="event-chip">Congress</span>
+              <span class="event-chip">Impromptu</span>
+            </div>
+
+            <div class="preview-steps">
+              <div class="preview-step-item">
+                <span class="preview-step-check">✓</span>
+                <span>130+ Debaters Active in Weekly Training & Scrimmages</span>
+              </div>
+              <div class="preview-step-item">
+                <span class="preview-step-check">✓</span>
+                <span>100% Free Novice Kits & Turnkey Coach Handbooks</span>
+              </div>
+              <div class="preview-step-item">
+                <span class="preview-step-check">✓</span>
+                <span>Coordinators: Derin Gulkanat & Ishan Saha</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.25rem; padding-top: 0.85rem; border-top: 1px solid var(--surface-border); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--slate-500); text-transform: uppercase; font-weight: 600;">Cloud Database</span>
+                <p style="font-weight: 700; font-size: 0.85rem; color: var(--navy-900); margin: 0;">PostgreSQL Live Synced</p>
+              </div>
+              <a href="chapter-tracker.html" class="btn btn-secondary btn-sm" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;">
+                Open Registry
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HIGH-DENSITY KEY IMPACT STATS (HAIRLINE DIVIDER BAR) -->
+    <section class="stats-section" aria-label="Impact Metrics">
+      <div class="container">
+        <div class="stats-grid" id="stats-grid"></div>
+      </div>
+    </section>
+
+    <!-- WHAT WE DO (IN THE PLACE WHERE THE BENEFITS OF SPEECH & DEBATE WAS BEFORE) -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="mono-tag-crimson" style="margin-bottom: 0.75rem;">OUR MISSION</span>
+          <h2>What We Do</h2>
+          <p class="section-subtitle">
+            At Elevate the Circuit, our mission is to empower students through the transformative benefits of speech and debate. We partner with public middle and high schools to establish thriving forensics programs through what we do:
+          </p>
+        </div>
+
+        <div class="pillars-grid" id="pillars-grid">
+          <div class="pillar-card">
+            <div class="pillar-icon-box" style="background: var(--navy-wash); color: var(--navy-dark); border: 1px solid rgba(10, 17, 40, 0.1);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+            </div>
+            <div style="flex: 1;">
+              <h3 class="pillar-title" style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--navy-dark); margin: 0 0 0.3rem;">We Provide Resources</h3>
+              <p class="pillar-desc" style="color: var(--slate-600); font-size: 0.92rem; line-height: 1.6; margin: 0;">Equipping students and educators with 100% free turnkey curriculum kits, topic briefs, judge rubrics, and starter materials.</p>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon-box" style="background: var(--navy-wash); color: var(--navy-dark); border: 1px solid rgba(10, 17, 40, 0.1);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div style="flex: 1;">
+              <h3 class="pillar-title" style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--navy-dark); margin: 0 0 0.3rem;">Provide Coaching</h3>
+              <p class="pillar-desc" style="color: var(--slate-600); font-size: 0.92rem; line-height: 1.6; margin: 0;">Connecting chapters with experienced varsity mentors and alumni coaches to train debaters and teach speech delivery.</p>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon-box" style="background: var(--navy-wash); color: var(--navy-dark); border: 1px solid rgba(10, 17, 40, 0.1);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+            </div>
+            <div style="flex: 1;">
+              <h3 class="pillar-title" style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--navy-dark); margin: 0 0 0.3rem;">Organize Tournaments</h3>
+              <p class="pillar-desc" style="color: var(--slate-600); font-size: 0.92rem; line-height: 1.6; margin: 0;">Hosting accessible local and regional forensics competitions with certified judge pools, constructive feedback, and fee grants.</p>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon-box" style="background: var(--navy-wash); color: var(--navy-dark); border: 1px solid rgba(10, 17, 40, 0.1);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 6 8-4 8 4"/><path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"/><path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/><path d="M18 5v17"/><path d="M6 5v17"/></svg>
+            </div>
+            <div style="flex: 1;">
+              <h3 class="pillar-title" style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--navy-dark); margin: 0 0 0.3rem;">Start Chapters</h3>
+              <p class="pillar-desc" style="color: var(--slate-600); font-size: 0.92rem; line-height: 1.6; margin: 0;">Providing turnkey guides and direct coordinator support to help students and faculty advisors found active speech and debate clubs.</p>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon-box" style="background: var(--navy-wash); color: var(--navy-dark); border: 1px solid rgba(10, 17, 40, 0.1);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>
+            </div>
+            <div style="flex: 1;">
+              <h3 class="pillar-title" style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--navy-dark); margin: 0 0 0.3rem;">Coordinate Multi-State Meetings</h3>
+              <p class="pillar-desc" style="color: var(--slate-600); font-size: 0.92rem; line-height: 1.6; margin: 0;">Facilitating cross-regional assemblies and collaborative leadership sessions connecting debaters from across multiple states.</p>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon-box" style="background: var(--navy-wash); color: var(--navy-dark); border: 1px solid rgba(10, 17, 40, 0.1);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+            </div>
+            <div style="flex: 1;">
+              <h3 class="pillar-title" style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--navy-dark); margin: 0 0 0.3rem;">Organize Practice Opportunities</h3>
+              <p class="pillar-desc" style="color: var(--slate-600); font-size: 0.92rem; line-height: 1.6; margin: 0;">Structuring weekly practice debates, inter-school scrimmage pairings, and low-stakes sparring rounds to build real-time confidence.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CALL TO ACTION (SOLID DEEP NAVY PANEL) -->
+    <section class="section" style="background: var(--navy-950); color: #ffffff; padding: 4.5rem 0;">
+      <div class="container" style="max-width: 860px;">
+        <span class="mono-tag-crimson" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); color: #ffffff; margin-bottom: 1rem;">100% FREE CHAPTER PACKAGES</span>
+        <h2 style="color: #ffffff; font-family: var(--font-serif); font-size: clamp(2rem, 3.8vw, 2.75rem); margin-bottom: 1rem;">
+          Bring Speech & Debate to Your School.
+        </h2>
+        <p style="color: rgba(255, 255, 255, 0.75); font-size: 1.08rem; line-height: 1.6; margin-bottom: 2rem; max-width: 680px;">
+          Whether you are a student leader hungry to compete or an educator ready to sponsor a team, Elevate the Circuit equips you with official syllabi, practice motions, judge mentors, and tournament opportunities.
+        </p>
+        <div style="display: flex; gap: 0.85rem; align-items: center; flex-wrap: wrap;">
+          <a href="get-involved.html" class="btn btn-primary" style="background: #ffffff; color: var(--navy-950); border-color: #ffffff; box-shadow: var(--machined-btn-primary);">
+            Start a Chapter at Your School
+          </a>
+          <a href="chapter-tracker.html" class="btn btn-secondary" style="background: transparent; color: #ffffff; border-color: rgba(255,255,255,0.2);">
+            View National Tracker
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3 style="color: var(--navy-900); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.35rem;" data-bind="org-name">Elevate the Circuit</h3>
+          <p data-bind="org-tagline">Empowering Students to Find Their Voice & Lead.</p>
+          <div class="footer-socials" id="footer-socials"></div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">National Circuit</h4>
+          <ul class="footer-links" id="footer-quick-links"></ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Get Involved</h4>
+          <ul class="footer-links">
+            <li><a href="get-involved.html" class="footer-link">Found a Chapter</a></li>
+            <li><a href="chapter-tracker.html" class="footer-link">Chapter Directory</a></li>
+            <li><a href="resources.html" class="footer-link">Download Starter Kits</a></li>
+            <li><a href="contact.html" class="footer-link">Contact Coordinators</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Direct Contact</h4>
+          <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 0.65rem;">
+            Questions about starting a chapter? Reach our coordinators anytime:
+          </p>
+          <p style="font-weight: 700;">
+            <a href="mailto:elevatethecircuitusa@gmail.com" data-bind="org-email" style="color: var(--navy-900);">elevatethecircuitusa@gmail.com</a>
+          </p>
+          <p style="font-size: 0.82rem; color: var(--slate-400); margin-top: 0.5rem;" data-bind="org-location">
+            National Initiative • Local Chapters Nationwide
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p id="footer-copy">© 2026 Elevate the Circuit. All rights reserved.</p>
+        <p>Built with non-profit dedication for student empowerment.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core Scripts -->
+  <script type="module" src="js/supabase-client.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

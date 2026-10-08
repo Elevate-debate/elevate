@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter Application - Elevate the Circuit</title>
+  <meta name="description" content="Official speech & debate chapter application for middle and high schools. Receive free curriculum starter kits, advisor resources, and tournament pairings.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Top Announcement Banner -->
+  <aside id="announcement-banner" class="announcement-bar" role="complementary" aria-label="Announcement"></aside>
+
+  <!-- Site Header & Navigation -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="index.html" class="brand-logo" aria-label="Home">
+        <div class="brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m4 6 8-4 8 4"/><path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"/><path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/><path d="M18 5v17"/><path d="M6 5v17"/></svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name" data-bind="org-short">Elevate the Circuit</span>
+          <span class="brand-subtext">Chapter Application</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links" id="site-nav-links"></ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Live Supabase Status & SSO User Dock -->
+        <div class="nav-user-dock" id="nav-user-dock"></div>
+
+        <a href="#start-chapter" class="btn btn-primary btn-sm">Start a Chapter</a>
+        <button id="mobile-menu-btn" class="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- CHAPTER APPLICATION SECTION ONLY -->
+    <section class="section" style="padding: 3.5rem 0 4.5rem; background: var(--canvas);">
+      <div class="container" style="max-width: 860px;">
+        <div class="section-header" style="margin-bottom: 2.25rem; text-align: center;">
+          <span class="mono-tag-crimson" style="margin-bottom: 0.75rem;">100% FREE STARTER KITS</span>
+          <h1 style="font-family: var(--font-serif); font-size: clamp(2.2rem, 4.5vw, 3.2rem); color: var(--navy-900); margin: 0 0 0.5rem;">
+            Official Chapter Application
+          </h1>
+          <p class="section-subtitle" style="margin: 0 auto; max-width: 620px; color: var(--slate-600); font-size: 1.05rem; line-height: 1.6;">
+            Fill out this 3-minute form to claim your free curriculum kit, faculty advisor blueprints, practice scrimmage pairings, and chapter starter resources.
+          </p>
+        </div>
+
+        <div class="form-card" id="start-chapter">
+          <form data-interactive="true" data-form-name="Chapter Application">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="applicant-name">Your Full Name *</label>
+                <input type="text" id="applicant-name" name="applicant_name" class="form-input" placeholder="e.g. Maya Rodriguez" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="applicant-email">Email Address *</label>
+                <input type="email" id="applicant-email" name="applicant_email" class="form-input" placeholder="maya@school.edu" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="applicant-role">Your Role *</label>
+                <select id="applicant-role" name="applicant_role" class="form-select" required>
+                  <option value="High School Student Founder">High School Student Founder</option>
+                  <option value="Middle School Student Founder">Middle School Student Founder</option>
+                  <option value="Teacher / Faculty Advisor">Teacher / Faculty Advisor</option>
+                  <option value="Parent / PTA Member">Parent / PTA Member</option>
+                  <option value="School Administrator">School Administrator</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="school-name">School / Organization Name *</label>
+                <input type="text" id="school-name" name="school_name" class="form-input" placeholder="e.g. West Lake High School" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="applicant-city">City *</label>
+                <input type="text" id="applicant-city" name="city" class="form-input" placeholder="e.g. Charlotte" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="applicant-state">State *</label>
+                <input type="text" id="applicant-state" name="state" class="form-input" placeholder="e.g. NC" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="estimated-students">Estimated Students Interested</label>
+                <input type="number" id="estimated-students" name="estimated_students" class="form-input" placeholder="e.g. 15" min="1" value="15">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="target-format">Preferred Debate Format</label>
+                <select id="target-format" name="target_format" class="form-select">
+                  <option value="Undecided / Recommend for us">Undecided / Please recommend for us</option>
+                  <option value="Public Forum (2v2 Policy & Current Events)">Public Forum (PF - 2v2)</option>
+                  <option value="Lincoln-Douglas (1v1 Ethics & Philosophy)">Lincoln-Douglas (LD - 1v1)</option>
+                  <option value="Middle School SPAR / Intro">Middle School SPAR / Intro</option>
+                  <option value="Congressional Debate">Congressional Debate</option>
+                  <option value="Original Oratory / Speech">Original Oratory / Speech</option>
+                </select>
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label" for="chapter-notes">Tell us about your school &amp; what you hope to achieve</label>
+                <textarea id="chapter-notes" name="notes" class="form-textarea" placeholder="Tell us if you have an advisor or classroom space, how many students are interested, or any specific questions..."></textarea>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.75rem; text-align: left;">
+              <button type="submit" class="btn btn-primary btn-lg">
+                Submit Chapter Application (Free)
+              </button>
+              <p style="font-size: 0.8rem; color: var(--slate-400); margin-top: 0.65rem;">
+                No fees or credit card required. Our coordinator will contact you within 48 hours with onboarding materials.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3 style="color: var(--navy-900); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.35rem;" data-bind="org-name">Elevate the Circuit</h3>
+          <p data-bind="org-tagline">Empowering Students to Find Their Voice & Lead.</p>
+          <div class="footer-socials" id="footer-socials"></div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Explore</h4>
+          <ul class="footer-links" id="footer-quick-links"></ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Get Involved</h4>
+          <ul class="footer-links">
+            <li><a href="get-involved.html" class="footer-link">Found a Chapter</a></li>
+            <li><a href="chapter-tracker.html" class="footer-link">Chapter Directory</a></li>
+            <li><a href="resources.html" class="footer-link">Free Starter Kits</a></li>
+            <li><a href="contact.html" class="footer-link">Contact Coordinators</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Direct Contact</h4>
+          <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 0.65rem;">
+            Questions about starting a chapter? Reach our coordinator anytime:
+          </p>
+          <p style="font-weight: 700;">
+            <a href="mailto:elevatethecircuitusa@gmail.com" data-bind="org-email" style="color: var(--navy-900);">elevatethecircuitusa@gmail.com</a>
+          </p>
+          <p style="font-size: 0.82rem; color: var(--slate-400); margin-top: 0.5rem;" data-bind="org-location">
+            National Initiative • Local Chapters Nationwide
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p id="footer-copy">© 2026 Elevate the Circuit. All rights reserved.</p>
+        <p>Built with non-profit dedication for student empowerment.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core Scripts -->
+  <script type="module" src="js/supabase-client.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
+
