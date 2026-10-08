@@ -167,6 +167,34 @@
       </div>
     </section>
 
+    <!-- INTERACTIVE 50-STATE US EXPANSION MAP -->
+    <section class="section us-map-section" id="national-map-section" style="padding: 4.5rem 0 5rem; background: var(--canvas);">
+      <div class="container">
+        <div class="section-header section-header-center" style="max-width: 760px; margin: 0 auto 2.5rem; text-align: center; display: flex; flex-direction: column; align-items: center;">
+          <span class="mono-tag-crimson" style="margin-bottom: 0.75rem;">NATIONAL EXPANSION</span>
+          <h2 style="font-family: var(--font-serif); font-size: clamp(2.2rem, 4.2vw, 3rem); color: var(--navy-900); margin: 0 0 0.5rem; text-align: center;">
+            National Chapter Footprint
+          </h2>
+          <p class="section-subtitle" style="margin: 0 auto; max-width: 650px; color: var(--slate-600); text-align: center;">
+            Explore active Elevate the Circuit chapters across the United States. Hover over any state on the map to inspect participating schools, student leadership, and local circuit chapters.
+          </p>
+        </div>
+
+        <!-- Map Container -->
+        <div class="us-map-wrapper">
+          <div class="us-map-card" style="padding: 1.5rem 1.75rem 2rem;">
+            <!-- SVG Map Canvas -->
+            <div class="us-map-svg-container" id="us-map-svg-container" style="position: relative;">
+              <!-- Rendered dynamically by main.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating Hover Tooltip (Fixed viewport positioning) -->
+    <div class="us-map-tooltip" id="us-map-tooltip" style="display: none;" role="tooltip"></div>
+
     <!-- WHAT WE DO (IN THE PLACE WHERE THE BENEFITS OF SPEECH & DEBATE WAS BEFORE) -->
     <section class="section section-alt">
       <div class="container">
@@ -316,6 +344,7 @@
   <!-- Core Scripts -->
   <script type="module" src="js/supabase-client.js"></script>
   <script src="js/config.js"></script>
+  <script src="js/us-map-data.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

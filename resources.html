@@ -60,14 +60,21 @@
 
         <!-- SEARCH AND FILTERS -->
         <div class="tracker-dock" style="margin: 0 0 2rem; padding: 1.25rem;">
-          <div class="search-box-wrap" style="width: 100%;">
-            <span class="search-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            </span>
-            <input type="text" id="resource-search" class="search-input" placeholder="Search by topic, format (e.g. 'PF', 'Middle School', 'Constitution')...">
+          <div style="display: flex; gap: 0.75rem; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+            <div class="search-box-wrap" style="flex: 1; min-width: 260px;">
+              <span class="search-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              </span>
+              <input type="text" id="resource-search" class="search-input" placeholder="Search by topic, format (e.g. 'PF', 'Middle School', 'Constitution')...">
+            </div>
+
+            <button id="open-manage-resources-btn" class="btn btn-sm btn-primary" onclick="window.openResourceManagerModal()" style="display: inline-flex; align-items: center; gap: 0.45rem; font-weight: 600; white-space: nowrap;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add / Manage Documents
+            </button>
           </div>
 
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--surface-border);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding-top: 0.75rem; margin-top: 0.75rem; border-top: 1px solid var(--surface-border);">
             <div class="filter-pills" role="toolbar" aria-label="Resource Categories">
               <button class="filter-btn active" data-category="all">All Resources</button>
               <button class="filter-btn" data-category="starter-kits">Starter Kits</button>
@@ -92,70 +99,173 @@
         <div class="resources-grid" id="resources-grid">
           <!-- Dynamically populated from js/config.js -->
         </div>
+
+        <!-- Call to Action Banner Below Library -->
+        <div class="resource-cta-callout" style="margin-top: 3.5rem; text-align: center; padding: 2.75rem 1.5rem; background: var(--surface); border: 1px solid var(--surface-border); border-radius: var(--radius-outer); box-shadow: var(--machined-light);">
+          <h3 style="font-family: var(--font-serif); font-size: 1.65rem; color: var(--navy-900); margin-bottom: 0.5rem; letter-spacing: -0.01em;">Want more resources?</h3>
+          <p style="font-size: 1.05rem; color: var(--slate-600); margin-bottom: 1.5rem; max-width: 580px; margin-left: auto; margin-right: auto; line-height: 1.55;">
+            Start a chapter to gain access to monthly resource drives!
+          </p>
+          <a href="get-involved.html#start-chapter" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+            Start a Chapter &rarr;
+          </a>
+        </div>
       </div>
     </section>
 
-    <!-- DEBATE FORMAT COMPARISON GUIDE -->
+    <!-- EVENTS COMPARISON GUIDE -->
     <section class="section section-alt">
       <div class="container">
         <div class="section-header">
-          <span class="mono-tag" style="margin-bottom: 0.75rem;">FORMAT CHEAT SHEET</span>
-          <h2>Which Debate Format Fits Your School?</h2>
+          <span class="mono-tag" style="margin-bottom: 0.75rem;">EVENTS CHEAT SHEET</span>
+          <h2>Which Events Fit Your School?</h2>
           <p class="section-subtitle">
-            Not sure where to begin? Here is a breakdown of the most popular speech and debate events supported by our chapter kits.
+            Not sure where to begin? Here is a breakdown of the most popular speech and debate events supported across our national chapter network.
           </p>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
-          <div class="stat-card" style="border: 1px solid var(--surface-border); border-radius: var(--radius-outer); padding: 1.5rem; background: var(--surface); box-shadow: var(--machined-light);">
-            <span class="mono-tag-crimson" style="margin-bottom: 0.75rem;">MOST POPULAR (2V2)</span>
-            <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.4rem;">Public Forum (PF)</h3>
-            <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 1rem;">
-              Partner-based debate centered on timely domestic and foreign policy topics. Emphasizes conversational persuasiveness accessible to everyday citizen judges.
-            </p>
-            <ul style="font-size: 0.82rem; color: var(--slate-500); padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem;">
+          <!-- 1. Public Forum -->
+          <div class="stat-card" style="border: 1px solid var(--surface-border); border-radius: var(--radius-outer); padding: 1.5rem; background: var(--surface); box-shadow: var(--machined-light); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="mono-tag-crimson" style="margin-bottom: 0.75rem;">DEBATE • 2V2 PARTNERS</span>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.4rem;">Public Forum (PF)</h3>
+              <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 1rem; line-height: 1.55;">
+                Partner-based debate centered on timely domestic and foreign policy topics. Emphasizes conversational persuasiveness accessible to everyday citizen judges.
+              </p>
+            </div>
+            <ul style="font-size: 0.82rem; color: var(--slate-500); padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; margin: 0;">
               <li>Team Size: 2 vs 2</li>
               <li>Focus: Current events, logic, evidence</li>
               <li>Great for: Novices & High Schoolers</li>
             </ul>
           </div>
 
-          <div class="stat-card" style="border: 1px solid var(--surface-border); border-radius: var(--radius-outer); padding: 1.5rem; background: var(--surface); box-shadow: var(--machined-light);">
-            <span class="mono-tag" style="margin-bottom: 0.75rem;">PHILOSOPHY & VALUES (1V1)</span>
-            <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.4rem;">Lincoln-Douglas (LD)</h3>
-            <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 1rem;">
-              One-on-one philosophical debate examining the ethical principles behind societal questions (e.g. justice, individual rights, utilitarianism).
-            </p>
-            <ul style="font-size: 0.82rem; color: var(--slate-500); padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem;">
+          <!-- 2. Lincoln-Douglas -->
+          <div class="stat-card" style="border: 1px solid var(--surface-border); border-radius: var(--radius-outer); padding: 1.5rem; background: var(--surface); box-shadow: var(--machined-light); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="mono-tag" style="margin-bottom: 0.75rem;">DEBATE • 1V1 VALUES</span>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.4rem;">Lincoln-Douglas (LD)</h3>
+              <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 1rem; line-height: 1.55;">
+                One-on-one philosophical debate examining the ethical principles behind societal questions (e.g. justice, individual rights, utilitarianism).
+              </p>
+            </div>
+            <ul style="font-size: 0.82rem; color: var(--slate-500); padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; margin: 0;">
               <li>Team Size: 1 vs 1</li>
               <li>Focus: Moral philosophy, political theory</li>
               <li>Great for: Independent analytical thinkers</li>
             </ul>
           </div>
 
-          <div class="stat-card" style="border: 1px solid var(--surface-border); border-radius: var(--radius-outer); padding: 1.5rem; background: var(--surface); box-shadow: var(--machined-light);">
-            <span class="mono-tag-crimson" style="margin-bottom: 0.75rem;">MIDDLE SCHOOL FAVORITE</span>
-            <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.4rem;">SPAR & Extemp Debate</h3>
-            <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 1rem;">
-              Spontaneous Argumentation (SPAR) gives debaters 2 minutes of prep to argue fun or accessible topics. Eliminates prep paralysis and builds immediate confidence.
-            </p>
-            <ul style="font-size: 0.82rem; color: var(--slate-500); padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem;">
+          <!-- 3. Policy Debate (CX) -->
+          <div class="stat-card" style="border: 1px solid var(--surface-border); border-radius: var(--radius-outer); padding: 1.5rem; background: var(--surface); box-shadow: var(--machined-light); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="mono-tag-crimson" style="margin-bottom: 0.75rem;">DEBATE • 2V2 IN-DEPTH RESEARCH</span>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.4rem;">Policy Debate (CX)</h3>
+              <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 1rem; line-height: 1.55;">
+                A rigorous, year-long deep dive into a single national policy topic. Teams craft detailed affirmative proposals and defend against complex counter-plans and disadvantages.
+              </p>
+            </div>
+            <ul style="font-size: 0.82rem; color: var(--slate-500); padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; margin: 0;">
+              <li>Team Size: 2 vs 2</li>
+              <li>Focus: In-depth research, policy mechanics, speed flowing</li>
+              <li>Great for: Dedicated researchers & intensive debaters</li>
+            </ul>
+          </div>
+
+          <!-- 4. Congressional Debate -->
+          <div class="stat-card" style="border: 1px solid var(--surface-border); border-radius: var(--radius-outer); padding: 1.5rem; background: var(--surface); box-shadow: var(--machined-light); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="mono-tag" style="margin-bottom: 0.75rem;">DEBATE • LEGISLATIVE SIMULATION</span>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.4rem;">Congressional Debate</h3>
+              <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 1rem; line-height: 1.55;">
+                Students simulate the U.S. Congress, drafting bills and resolutions, delivering 3-minute speeches, and voting using parliamentary procedure.
+              </p>
+            </div>
+            <ul style="font-size: 0.82rem; color: var(--slate-500); padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; margin: 0;">
+              <li>Team Size: Large chamber (15-25 students)</li>
+              <li>Focus: Politics, diplomacy, rhetoric</li>
+              <li>Great for: History and civics enthusiasts</li>
+            </ul>
+          </div>
+
+          <!-- 5. SPAR Debate -->
+          <div class="stat-card" style="border: 1px solid var(--surface-border); border-radius: var(--radius-outer); padding: 1.5rem; background: var(--surface); box-shadow: var(--machined-light); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="mono-tag-crimson" style="margin-bottom: 0.75rem;">DEBATE • MIDDLE SCHOOL FAVORITE</span>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.4rem;">SPAR Debate</h3>
+              <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 1rem; line-height: 1.55;">
+                Spontaneous Argumentation (SPAR) gives debaters 2 minutes of prep to argue fun or accessible topics. Eliminates prep paralysis and builds immediate round confidence.
+              </p>
+            </div>
+            <ul style="font-size: 0.82rem; color: var(--slate-500); padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; margin: 0;">
               <li>Team Size: 1 vs 1 or small teams</li>
               <li>Focus: Quick thinking, humor, public speaking</li>
               <li>Great for: 6th-8th graders & first club meetings</li>
             </ul>
           </div>
 
-          <div class="stat-card" style="border: 1px solid var(--surface-border); border-radius: var(--radius-outer); padding: 1.5rem; background: var(--surface); box-shadow: var(--machined-light);">
-            <span class="mono-tag" style="margin-bottom: 0.75rem;">LEGISLATIVE SIMULATION</span>
-            <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.4rem;">Congressional Debate</h3>
-            <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 1rem;">
-              Students simulate the U.S. Congress, drafting bills and resolutions, delivering 3-minute speeches, and voting using parliamentary procedure.
-            </p>
-            <ul style="font-size: 0.82rem; color: var(--slate-500); padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem;">
-              <li>Team Size: Large chamber (15-25 students)</li>
-              <li>Focus: Politics, diplomacy, rhetoric</li>
-              <li>Great for: History and civics enthusiasts</li>
+          <!-- 6. Original Oratory (OO) -->
+          <div class="stat-card" style="border: 1px solid var(--surface-border); border-radius: var(--radius-outer); padding: 1.5rem; background: var(--surface); box-shadow: var(--machined-light); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="mono-tag-crimson" style="margin-bottom: 0.75rem;">SPEECH • PERSUASIVE ORATORY</span>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.4rem;">Original Oratory (OO)</h3>
+              <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 1rem; line-height: 1.55;">
+                Students write and memorize an original 10-minute speech addressing a significant societal issue, combining personal insight, research, humor, and a call to action.
+              </p>
+            </div>
+            <ul style="font-size: 0.82rem; color: var(--slate-500); padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; margin: 0;">
+              <li>Format: 10-minute memorized speech</li>
+              <li>Focus: Personal voice, rhetoric, societal critique</li>
+              <li>Great for: Writers, passionate advocates & solo speakers</li>
+            </ul>
+          </div>
+
+          <!-- 7. Extemporaneous Speaking -->
+          <div class="stat-card" style="border: 1px solid var(--surface-border); border-radius: var(--radius-outer); padding: 1.5rem; background: var(--surface); box-shadow: var(--machined-light); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="mono-tag" style="margin-bottom: 0.75rem;">SPEECH • CURRENT EVENTS & NEWS</span>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.4rem;">Extemporaneous Speaking</h3>
+              <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 1rem; line-height: 1.55;">
+                Speakers draw three current event questions, choose one, and have 30 minutes of prep to craft a 7-minute speech citing reputable domestic and international news sources.
+              </p>
+            </div>
+            <ul style="font-size: 0.82rem; color: var(--slate-500); padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; margin: 0;">
+              <li>Format: 30 minutes prep, 7-minute speech</li>
+              <li>Focus: Domestic/Foreign policy, evidence synthesis</li>
+              <li>Great for: News junkies, policy minds & analytical thinkers</li>
+            </ul>
+          </div>
+
+          <!-- 8. Impromptu Speaking -->
+          <div class="stat-card" style="border: 1px solid var(--surface-border); border-radius: var(--radius-outer); padding: 1.5rem; background: var(--surface); box-shadow: var(--machined-light); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="mono-tag-crimson" style="margin-bottom: 0.75rem;">SPEECH • QUICK-FIRE THINKING</span>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.4rem;">Impromptu Speaking</h3>
+              <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 1rem; line-height: 1.55;">
+                Speakers receive a prompt (quote, word, or cartoon) and have 7 total minutes to divide between preparation and delivering an insightful, organized, and engaging speech.
+              </p>
+            </div>
+            <ul style="font-size: 0.82rem; color: var(--slate-500); padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; margin: 0;">
+              <li>Format: 7 minutes total (1-2m prep, 5-6m speech)</li>
+              <li>Focus: Mental agility, storytelling, structure on the fly</li>
+              <li>Great for: Quick thinkers & building stage comfort</li>
+            </ul>
+          </div>
+
+          <!-- 9. Interpretation Events -->
+          <div class="stat-card" style="border: 1px solid var(--surface-border); border-radius: var(--radius-outer); padding: 1.5rem; background: var(--surface); box-shadow: var(--machined-light); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="mono-tag" style="margin-bottom: 0.75rem;">SPEECH • ACTING & DRAMATICS</span>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.4rem;">Interpretation Events</h3>
+              <p style="font-size: 0.88rem; color: var(--slate-600); margin-bottom: 1rem; line-height: 1.55;">
+                Performers bring published literary pieces, plays, or poetry to life through characterization, vocal modulation, and emotional storytelling without props or costumes.
+              </p>
+            </div>
+            <ul style="font-size: 0.82rem; color: var(--slate-500); padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; margin: 0;">
+              <li>Events: Dramatic (DI), Humorous (HI), Duo, POI</li>
+              <li>Focus: Acting, character development, emotional range</li>
+              <li>Great for: Theater lovers, performers & expressive storytellers</li>
             </ul>
           </div>
         </div>
@@ -230,6 +340,130 @@
       </div>
     </div>
   </footer>
+
+  <!-- RESOURCE MANAGER MODAL -->
+  <div id="resource-manager-modal" class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="resource-modal-title">
+    <div class="auth-modal-dialog" style="max-width: 640px; max-height: 90vh; overflow-y: auto;">
+      <button class="auth-modal-close" onclick="window.closeResourceManagerModal()" aria-label="Close modal">&times;</button>
+      
+      <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.25rem;">
+        <span class="mono-tag-crimson" style="font-size: 0.7rem; padding: 0.15rem 0.5rem;">DOCUMENT HUB</span>
+        <span id="resource-sync-indicator" class="status-chip" style="font-size: 0.72rem; padding: 0.15rem 0.5rem; background: rgba(5,150,105,0.1); color: var(--success); border-radius: 9999px; font-weight: 600;">Cloud Synced</span>
+      </div>
+      <h3 id="resource-modal-title" style="font-family: var(--font-serif); font-size: 1.45rem; color: var(--navy-900); margin-bottom: 0.35rem;">Curriculum & Document Manager</h3>
+      <p style="font-size: 0.86rem; color: var(--slate-600); margin-bottom: 1.25rem; line-height: 1.5;">
+        Easily update, add, and organize debate documents for your chapters nationwide.
+      </p>
+
+      <!-- Cloud Sync (Google Sheets) Card -->
+      <div style="background: var(--surface-subtle); border: 1px solid var(--surface-border); border-radius: var(--radius-inner); padding: 1rem 1.15rem; margin-bottom: 1.5rem;">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 240px;">
+            <div style="font-weight: 700; font-size: 0.92rem; color: var(--navy-900); display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.3rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Option 1: Live Google Sheets (Zero Code)
+            </div>
+            <p style="font-size: 0.8rem; color: var(--slate-600); margin: 0 0 0.5rem; line-height: 1.45;">
+              Add or edit a row in the <strong>Resources</strong> tab of your spreadsheet. Paste your Google Drive, Docs, or PDF link, and the website updates in real-time.
+            </p>
+            <div style="font-size: 0.74rem; font-family: var(--font-mono); color: var(--slate-500); background: #ffffff; padding: 0.4rem 0.6rem; border-radius: 4px; border: 1px dashed var(--surface-border);">
+              Columns: Title | Category | Format | Description | Link | Badge | Details
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.4rem; align-self: center;">
+            <a href="https://docs.google.com/spreadsheets/d/1sJbN7keR-Fdi6pFJKnzG569WwNFXtfNgns4yiGOZNPY/edit" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary" style="white-space: nowrap; font-size: 0.8rem; text-decoration: none;">
+              Open Google Sheet &rarr;
+            </a>
+            <button type="button" class="btn btn-sm btn-secondary" onclick="window.copySheetHeaders()" style="font-size: 0.75rem; white-space: nowrap;">
+              Copy Column Headers
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Add Form -->
+      <div style="border-top: 1px solid var(--surface-border); padding-top: 1.25rem;">
+        <div style="font-weight: 700; font-size: 0.95rem; color: var(--navy-900); margin-bottom: 0.25rem;">
+          Option 2: Add Document Directly Here
+        </div>
+        <p style="font-size: 0.8rem; color: var(--slate-500); margin-bottom: 1rem;">
+          Quickly publish a document to this browser or generate a pre-formatted row for Google Sheets.
+        </p>
+
+        <form id="add-resource-form" onsubmit="window.handleAddNewResource(event)">
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label class="form-label" for="res-input-title" style="font-size: 0.82rem; font-weight: 600;">Document Title <span style="color: var(--accent);">*</span></label>
+            <input type="text" id="res-input-title" class="form-input" placeholder="e.g. 2026 Novice PF Evidence Brief" required style="font-size: 0.88rem; padding: 0.55rem 0.75rem;">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="res-input-category" style="font-size: 0.82rem; font-weight: 600;">Category <span style="color: var(--accent);">*</span></label>
+              <select id="res-input-category" class="form-input" required style="font-size: 0.88rem; padding: 0.55rem 0.75rem;">
+                <option value="starter-kits">Starter Kits</option>
+                <option value="curriculum" selected>Curriculum</option>
+                <option value="middle-school">Middle School</option>
+                <option value="formats">Debate Formats</option>
+                <option value="topics">Topics & Motions</option>
+                <option value="tournaments">Tournaments</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="res-input-format" style="font-size: 0.82rem; font-weight: 600;">Format / File Type</label>
+              <input type="text" id="res-input-format" class="form-input" placeholder="e.g. PDF Guide, Google Doc, Slide Deck" value="PDF Guide" style="font-size: 0.88rem; padding: 0.55rem 0.75rem;">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label class="form-label" for="res-input-link" style="font-size: 0.82rem; font-weight: 600;">Document / Download Link <span style="color: var(--accent);">*</span></label>
+            <input type="url" id="res-input-link" class="form-input" placeholder="Paste Google Drive, Google Docs, Dropbox, or PDF link..." required style="font-size: 0.88rem; padding: 0.55rem 0.75rem;">
+            <div style="font-size: 0.72rem; color: var(--slate-400); margin-top: 0.25rem;">
+              Tip: Supports Google Drive share links, Google Docs, Notion, Canva, or any direct URL.
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label class="form-label" for="res-input-desc" style="font-size: 0.82rem; font-weight: 600;">Description</label>
+            <textarea id="res-input-desc" class="form-input" rows="2" placeholder="Brief summary of what's inside and how debaters or advisors should use it..." style="font-size: 0.85rem; padding: 0.55rem 0.75rem; resize: vertical;"></textarea>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.25rem;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="res-input-badge" style="font-size: 0.82rem; font-weight: 600;">Badge / Tag (Optional)</label>
+              <input type="text" id="res-input-badge" class="form-input" placeholder="e.g. Essential, New, 2026, Novice" style="font-size: 0.88rem; padding: 0.55rem 0.75rem;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="res-input-details" style="font-size: 0.82rem; font-weight: 600;">Size / Modules (Optional)</label>
+              <input type="text" id="res-input-details" class="form-input" placeholder="e.g. 12 Modules, 24 Pages, ZIP" style="font-size: 0.88rem; padding: 0.55rem 0.75rem;">
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+            <button type="submit" class="btn btn-primary btn-sm" style="flex: 1; min-width: 140px; justify-content: center;">
+              Save & Publish to Page
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="window.copyCurrentResourceRow()" style="font-size: 0.8rem; white-space: nowrap;">
+              Copy Row for Google Sheets
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="window.exportResourcesJson()" style="font-size: 0.8rem; white-space: nowrap;">
+              Export JSON
+            </button>
+          </div>
+        </form>
+
+        <!-- Locally Added Documents Drawer -->
+        <div id="local-resources-tray" style="margin-top: 1.5rem; display: none;">
+          <div style="font-size: 0.82rem; font-weight: 700; color: var(--navy-900); margin-bottom: 0.4rem; display: flex; justify-content: space-between; align-items: center;">
+            <span>Locally Added Documents (<span id="local-resources-count">0</span>)</span>
+            <button type="button" onclick="window.clearCustomResources()" style="background: none; border: none; color: var(--accent); font-size: 0.75rem; cursor: pointer; text-decoration: underline;">Clear All</button>
+          </div>
+          <div id="local-resources-list" style="display: flex; flex-direction: column; gap: 0.35rem; max-height: 150px; overflow-y: auto;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Core Scripts -->
   <script type="module" src="js/supabase-client.js"></script>

@@ -174,6 +174,7 @@ window.SITE_CONFIG = {
   ],
 
   // --- RESOURCES DIRECTORY (resources.html) ---
+  // Comprehensive resource library across all categories, live-augmented by Google Sheets "Resources" tab
   resources: [
     {
       id: "res-1",
@@ -183,7 +184,8 @@ window.SITE_CONFIG = {
       format: "PDF & Notion Template",
       badge: "Essential",
       description: "Everything you need to launch: Sample club constitution, school board approval letter template, first 4 meeting agendas, and recruitment flyers.",
-      downloadLink: "#",
+      link: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
       readTime: "Complete Package (ZIP / Docs)"
     },
     {
@@ -194,7 +196,8 @@ window.SITE_CONFIG = {
       format: "Slide Decks & Handouts",
       badge: "Popular",
       description: "Structured lesson plans covering argument construction (Claim-Warrant-Impact), rebuttal strategies, cross-examination, and flowing round notes.",
-      downloadLink: "#",
+      link: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
       readTime: "12 Modules"
     },
     {
@@ -205,7 +208,8 @@ window.SITE_CONFIG = {
       format: "Guidebook (PDF)",
       badge: "Beginner-Friendly",
       description: "Fast-paced, high-energy debate games designed specifically for 6th-8th graders to build confidence without intimidating terminology.",
-      downloadLink: "#",
+      link: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
       readTime: "24 Pages"
     },
     {
@@ -213,10 +217,11 @@ window.SITE_CONFIG = {
       title: "Public Forum (PF) Master Guide",
       category: "formats",
       categoryName: "Debate Formats",
-      format: "Video + Comprehensive Doc",
+      format: "Comprehensive Guide (PDF)",
       badge: "High School",
       description: "Complete breakdown of Public Forum timing, speaker responsibilities, evidence citation standards, and grand crossfire tactics.",
-      downloadLink: "#",
+      link: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
       readTime: "Comprehensive Guide"
     },
     {
@@ -227,7 +232,8 @@ window.SITE_CONFIG = {
       format: "Guidebook (PDF)",
       badge: "Philosophy & Ethics",
       description: "A beginner's guide to 1-on-1 philosophical debate: understanding ethical frameworks, utilitarianism, deontology, and resolution analysis.",
-      downloadLink: "#",
+      link: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
       readTime: "18 Pages"
     },
     {
@@ -238,7 +244,8 @@ window.SITE_CONFIG = {
       format: "Database / PDF",
       badge: "Updated Monthly",
       description: "100+ curated debate motions categorized by difficulty and theme (Technology, AI Ethics, Climate Policy, Education, Economics, Pop Culture).",
-      downloadLink: "#",
+      link: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
       readTime: "100+ Motions"
     },
     {
@@ -249,7 +256,8 @@ window.SITE_CONFIG = {
       format: "Printable Checklist",
       badge: "Preparation",
       description: "Packing lists, Tabroom.com registration guide, tournament etiquette, timer apps, and how to read judge ballots constructively.",
-      downloadLink: "#",
+      link: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
       readTime: "Printable Checklist"
     },
     {
@@ -260,7 +268,8 @@ window.SITE_CONFIG = {
       format: "Doc / PDF",
       badge: "For Teachers",
       description: "A clear overview for teachers with zero debate experience. Explains time commitment, school insurance, chaperone requirements, and student leadership roles.",
-      downloadLink: "#",
+      link: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
       readTime: "10 Pages"
     }
   ],
@@ -343,6 +352,98 @@ window.SITE_CONFIG = {
     {
       question: "How do practice scrimmages work?",
       answer: "Active chapters can request scrimmage pairings with nearby schools or participate in online practice sessions to test arguments in a supportive setting."
+    }
+  ],
+
+  // --- RESOURCES DIRECTORY (resources.html) ---
+  resources: [
+    {
+      id: "res-1",
+      title: "Official Chapter Starter Kit 2026",
+      category: "starter-kits",
+      categoryName: "Starter Kits",
+      format: "PDF & Notion Template",
+      badge: "Essential",
+      description: "Everything you need to launch: Sample club constitution, school board approval letter template, first 4 meeting agendas, and recruitment flyers.",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      readTime: "Complete Package (ZIP / Docs)"
+    },
+    {
+      id: "res-2",
+      title: "12-Week Novice Debate Curriculum",
+      category: "curriculum",
+      categoryName: "Curriculum",
+      format: "Slide Decks & Handouts",
+      badge: "Popular",
+      description: "Structured lesson plans covering argument construction (Claim-Warrant-Impact), rebuttal strategies, cross-examination, and flowing round notes.",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      readTime: "12 Modules"
+    },
+    {
+      id: "res-3",
+      title: "Middle School Debate Playbook: Spar & Mini-Debates",
+      category: "middle-school",
+      categoryName: "Middle School",
+      format: "Guidebook (PDF)",
+      badge: "Beginner-Friendly",
+      description: "Fast-paced, high-energy debate games designed specifically for 6th-8th graders to build confidence without intimidating terminology.",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      readTime: "24 Pages"
+    },
+    {
+      id: "res-4",
+      title: "Public Forum (PF) Master Guide",
+      category: "formats",
+      categoryName: "Debate Formats",
+      format: "Comprehensive Guide (PDF)",
+      badge: "High School",
+      description: "Complete breakdown of Public Forum timing, speaker responsibilities, evidence citation standards, and grand crossfire tactics.",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      readTime: "Comprehensive Guide"
+    },
+    {
+      id: "res-5",
+      title: "Lincoln-Douglas (LD) Value & Criterion Primer",
+      category: "formats",
+      categoryName: "Debate Formats",
+      format: "Guidebook (PDF)",
+      badge: "Philosophy & Ethics",
+      description: "A beginner's guide to 1-on-1 philosophical debate: understanding ethical frameworks, utilitarianism, deontology, and resolution analysis.",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      readTime: "18 Pages"
+    },
+    {
+      id: "res-6",
+      title: "2026 Practice Motions & Topic Compendium",
+      category: "topics",
+      categoryName: "Topics & Motions",
+      format: "Database / PDF",
+      badge: "Updated Monthly",
+      description: "100+ curated debate motions categorized by difficulty and theme (Technology, AI Ethics, Climate Policy, Education, Economics, Pop Culture).",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      readTime: "100+ Motions"
+    },
+    {
+      id: "res-7",
+      title: "Tournament Survival & Logistics Checklist",
+      category: "tournaments",
+      categoryName: "Tournaments",
+      format: "Printable Checklist",
+      badge: "Preparation",
+      description: "Packing lists, Tabroom.com registration guide, tournament etiquette, timer apps, and how to read judge ballots constructively.",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      readTime: "Printable Checklist"
+    },
+    {
+      id: "res-8",
+      title: "Faculty Advisor & Parent Guide",
+      category: "starter-kits",
+      categoryName: "Starter Kits",
+      format: "Doc / PDF",
+      badge: "For Teachers",
+      description: "A clear overview for teachers with zero debate experience. Explains time commitment, school insurance, chaperone requirements, and student leadership roles.",
+      downloadLink: "https://drive.google.com/drive/u/3/folders/1cZPMLz2QSXD0vFvD6qlgTShHg0rGPBM_",
+      readTime: "10 Pages"
     }
   ],
 
