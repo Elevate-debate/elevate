@@ -1,0 +1,19 @@
+{
+  "name": "Elevate the Circuit - National Youth Speech & Debate Network",
+  "short_name": "Elevate the Circuit",
+  "description": "Empowering middle and high schools to launch thriving speech and debate chapters with 100% free curriculum kits, coaching mentorship, and tournament fee grants.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fcfbf9",
+  "theme_color": "#0a1128",
+  "icons": [
+    {
+      "src": "/LOGO.png",
+      "sizes": "232x282",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
+

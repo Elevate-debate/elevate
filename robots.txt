@@ -1,0 +1,42 @@
+# robots.txt for Elevate the Circuit (https://elevatethecircuit.org)
+
+User-agent: *
+Allow: /
+Disallow: /ETC%20Ov.zip
+Disallow: /ETC Ov.zip
+Disallow: /supabase-schema.sql
+
+# Search Engine Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# AI Search Engine & Answer Engine Crawlers (ChatGPT, Claude, Perplexity, Google AI Overviews)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://elevatethecircuit.org/sitemap.xml
+
